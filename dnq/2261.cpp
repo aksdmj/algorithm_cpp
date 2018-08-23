@@ -47,16 +47,17 @@ int solve(vector<point>::iterator it, int n){
     if(sq(dd) < d) st.insert(it[i]);
     else break;
   }
+  /*
   printf("set info \n");
   for(auto it1 = st.begin(); it1 != st.end(); it1++){
       printf("%d ", (*it1).x);
   }
   printf("\n");
-
+  */
   for(auto it1 = st.begin(); it1 != st.end(); it1++){
-    printf("it %d %d , yd =%d, d= %d \n", (*it1).x, (*(next(it1, 1))).x,sq((*(next(it1,1))).y - (*it).y),d) ;
-    for(auto it2 = next(it1,1); it2!=st.end() && sq((*it2).y - (*it).y) < d; it2++){
-      printf("it %d %d\n", (*it1).x, (*it2).x);
+    //printf("it1 %d %d , yd =%d, d= %d \n", (*it1).x, (*(next(it1, 1))).x,sq((*(next(it1,1))).y - (*it1).y),d) ;
+    for(auto it2 = next(it1,1); it2!=st.end() && sq((*it2).y - (*it1).y) < d; it2++){
+      //printf("it2 %d %d\n", (*it1).x, (*it2).x);
       d = min(d, dist(*it1, *it2));
     }
   }
