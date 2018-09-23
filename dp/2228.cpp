@@ -12,27 +12,35 @@ int dp[110][60];
 int dp2[110][60];
 
 int main(){
-  memset(dp,0,sizeof(dp));
   scanf("%d %d", &n, &m);
-  for(int i=0;i<n;i++){
+  for(int i=1;i<=n;i++){
     scanf("%d", &arr[i]);
   }
 
-  for(int i=0;i<n;i++){
+  for(int i=0;i<=n;i++){
+    for(int j=0;j<=m;j++){
+      dp[i][j] = MIN;
+      dp2[i][j] = MIN;
+    }
+  }
+  for(int i=0;i<=n;i++){
     for(int j=0;j<=m;j++){
       if(j==0){
-        dp[i][j] = 0;
         dp2[i][j] = 0;
+        dp[i][j] = 0;
         continue;
       }
-      if(j > (i+1)/2){
-        dp[i][j] = MIN;
+      if(j>(i+1)/2){
         continue;
       }
-      dp2[i][j] = max(dp2[i-1][j], dp[i-2][j-1]) + arr[i];
+      if(i==1){
+        dp2[i][j] = arr[i];
+        dp[i][j] = arr[i];
+      }
+      dp2[i][j] = max(dp2[i-1][j], dp[i-2][j-1])+arr[i];
       dp[i][j] = max(dp2[i][j], dp[i-1][j]);
     }
   }
-  printf("%d\n", dp[n-1][m]);
+  printf("%d\n", dp[n][m]);
 
 }
